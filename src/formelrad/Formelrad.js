@@ -11,6 +11,18 @@ export default function Formelrad() {
         p: ""
     })
 
+    const calculate = (event) => {
+        event.preventDefault();
+        console.log("calculate");
+        if (values.i === "" && values.r === "") {
+            setValues(values => ({...values, i: values.p / values.u}));
+            setValues(values => ({...values, r: values.u * values.u / values.p}));
+        } else if (values.i === "" && values.p === "") {
+            setValues(values => ({...values, i: values.u / values.r}));
+            setValues(values => ({...values, p: values.u * values.u / values.r}));
+        }
+    }
+
     return (
         <>
             <section>
@@ -18,11 +30,11 @@ export default function Formelrad() {
                     <h2>Formelrad</h2>
                     <img src={formelrad} width="200" alt="Formelrad" />
                 </header>
-                <form>
-                    <InputField color={"black"} value={values.u} label="Spannung" handleChange={e => { setValues(values => ({ ...values, u: e.target.value })) }} />
-                    <InputField color={"black"} value={values.i} label="Stromstaerke" handleChange={e => { setValues(values => ({ ...values, i: e.target.value })) }} />
-                    <InputField color={"black"} value={values.r} label="Widerstand" handleChange={e => { setValues(values => ({ ...values, r: e.target.value })) }} />
-                    <InputField color={"black"} value={values.p} label="Leistung" handleChange={e => { setValues(values => ({ ...values, p: e.target.value })) }} />
+                <form onSubmit={calculate}>
+                    <InputField color={"black"} value={values.u} label="Spannung" handleChange={e => setValues(values => ({ ...values, u: e.target.value }))} />
+                    <InputField color={"black"} value={values.i} label="Stromstärke" handleChange={e => setValues(values => ({ ...values, i: e.target.value }))} />
+                    <InputField color={"black"} value={values.r} label="Widerstand" handleChange={e => setValues(values => ({ ...values, r: e.target.value }))} />
+                    <InputField color={"black"} value={values.p} label="Leistung" handleChange={e => setValues(values => ({ ...values, p: e.target.value }))} />
                     <button type="submit">Calculate</button>
                 </form>
             </section>
