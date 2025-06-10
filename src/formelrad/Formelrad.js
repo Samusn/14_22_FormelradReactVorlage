@@ -20,6 +20,9 @@ export default function Formelrad() {
         } else if (values.i === "" && values.p === "") {
             setValues(values => ({...values, i: values.u / values.r}));
             setValues(values => ({...values, p: values.u * values.u / values.r}));
+        } else {
+            setValues(values => ({...values, r: values.u / values.i}));
+            setValues(values => ({...values, p: values.u * values.i}));
         }
     }
 
